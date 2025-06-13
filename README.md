@@ -1,14 +1,12 @@
-# Java Preperation Classes Excersise
+# Java Preparation Exercise
 
-A hands-on journey to master Java through 11 real-world command-line projects—each crafted to sharpen your OOP, logic, and problem-solving skills from the ground up.
+A hands-on journey to learn Java through 11 real-world command-line projects—each crafted to sharpen your OOP, logic, and problem-solving skills from the ground up.
 
 ---
 
-## 📘 What is this?
+## Our Motivation
 
-A curated collection of beginner-to-intermediate Java CLI projects—each built to solidify core concepts like classes, exceptions, input handling, and data structures without relying on any external libraries.
-
-These projects range from utilities like password managers to interactive games like Hangman, giving you a comprehensive foundation for software development.
+We struggled with Java basics in college, and we wanted to create a practical learning experience that would help students of all levels improve their Java skills. We found that college assignments were not quite enough. Many of us have been struggling to find a proper project to get started with. We were taught to code but never quite on how to implement it. We wanted to create a project that would help students understand the concepts better. So we created this repo of projects to help students learn Java in a fun-interactive way.
 
 ---
 
@@ -18,10 +16,7 @@ Java is a powerful, industry-grade language, but learning it through theory alon
 
 - 🚀 Level up by solving real-world problems.
 - 🧠 Internalize OOP concepts, collections, exceptions, and file handling.
-- 💻 Prepare for interviews, college assignments, or freelance projects.
-- 🎯 Focus on logic, design, and clean code—without distractions from GUI or libraries.
-
-Whether you’re a student, hobbyist, or aspiring backend dev, these projects are your playground for practical Java mastery.
+- 💻 College assignments.
 
 ---
 
@@ -66,6 +61,18 @@ To get started, we will need some software;
 
 Each project is contained within its respective folder and comes with a detailed README on how to run and test it.
 
+To build and run a project:
+
+```bash
+# compile (replace <Folder_name> with the project folder)
+cd <Folder_name>
+javac *.java
+
+# run (replace MainClass with the CLI entry class)
+java MainClass.java
+```
+
+
 ---
 
 ## 📦 Detailed Project Highlights
@@ -76,7 +83,6 @@ Each project is contained within its respective folder and comes with a detailed
 - Display class average and corresponding grade letter
 - Show top‐scoring student
 - List all students with their scores & grade letters
-- Exit program
 
 ---
 
@@ -143,6 +149,8 @@ Each project is contained within its respective folder and comes with a detailed
 - Completion percentage + overdue detection
 - Uses LocalDate and custom exception handling
 
+---
+
 10. [**ATM Simulator**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ATM)
 
 - PIN-authenticated transactions with demo account
@@ -173,7 +181,7 @@ Each project is contained within its respective folder and comes with a detailed
 
 - No external libraries—pure Java.
 - Use Ctrl+C or Exit option in menus to stop apps.
-- Feel free to fork, modify, and share your versions!
+- Feel free to fork, modify, and provide suggestions!
 
 ---
 
@@ -182,3 +190,12 @@ Each project is contained within its respective folder and comes with a detailed
 Learning Java doesn’t have to be boring. These projects are designed to be fun, practical, and progressive—so you actually enjoy the learning process while building a portfolio.
 
 > 🎉 Let’s code Java the way it was meant to be—clean, clever, and console-ready.
+
+> If you wish to request any project or have any feedback, please don’t hesitate to reach out. [mailto:dev@icp.edu.np]
+
+---
+
+## Disclaimer
+
+Even though our aim is to make sure that you understand the concepts, we don't expect you to copy paste the code. We expect you to try to understand the project requirements and then write the code for it yourself. If you feel stuck or confused about the solution we have provided hints and pseudocode and ultimately the solution as well in the respective project directory. <br> <br>
+<b>This repo is for learning purpose, we don't guarantee that it will help you master java but we ensure that it will help you understand programming.</b>
