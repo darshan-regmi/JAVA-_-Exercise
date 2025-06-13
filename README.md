@@ -1,147 +1,184 @@
-# Java CLI Projects Collection
+# Java Preperation Classes Excersise
 
-This repository contains **11 standalone, terminal-based Java applications**. Each project is completely independent, lives in its own package/folder, and uses only the Java Standard Library—no external dependencies.
-
-All source code targets **Java 17+**, but will compile on any modern JDK (8+). To build and run a project:
-
-```bash
-# compile (replace <Package> with the project folder)
-cd <Package>
-javac *.java
-
-# run (replace MainClass with the CLI entry class)
-java <Package>.MainClass
-```
+A hands-on journey to master Java through 11 real-world command-line projects—each crafted to sharpen your OOP, logic, and problem-solving skills from the ground up.
 
 ---
 
-## 1. Student Grade Calculator (`Student_Grade`)
+## 📘 What is this?
 
-A utility to record student names and grades, calculate the class average, determine top student, and list all entries.
+A curated collection of beginner-to-intermediate Java CLI projects—each built to solidify core concepts like classes, exceptions, input handling, and data structures without relying on any external libraries.
 
-**Highlights**
-
-- ArrayLists for dynamic data storage
-- Validation of grades (0–100)
-- Letter-grade conversion (A–F)
-- Menu-driven loop with robust input handling
-
-## 2. Banking Account Manager (`BankAccount`)
-
-Manages multiple bank accounts: create, deposit, withdraw, balance inquiry, list all.
-
-**Highlights*
-*
-- `Account` model encapsulates data & rules
-- Custom `InsufficientFundsException`
-- Stream API for account lookup
-- Modular methods for each operation
-
-## 3. Library Book Manager (`LibraryManagement`)
-
-Catalog of library books with search, borrow, return, and availability tracking.
-
-**Highlights**
-
-- `Book` class with auto-increment ID and availability flag
-- Keyword search across title, author, ISBN
-- Exceptions for already-borrowed / not-found books
-- CLI shows results in nicely formatted list
-
-## 4. Expense Tracker (`ExpenseTracker`)
-
-Personal finance tracker supporting expense entry, category totals, monthly views, and budget monitoring.
-
-**Highlights**
-
-- `Expense` model stores amount, category, date, description
-- Predefined categories/budgets & over-budget alert
-- Date parsing via `java.time` API
-- Totals and filters implemented with streams
-
-## 5. Contact Directory (`ContactDirectory`)
-
-Store, search, edit, and list personal contacts.
-
-**Highlights**
-
-- Regex validation for phone and email
-- Duplicate-contact prevention
-- Edit functionality for phone/email
-- Custom validation exceptions
-
-## 6. Quiz Game Engine (`QuizGame`)
-
-Interactive multiple-choice quiz with score, accuracy %, and difficulty level.
-
-**Highlights**
-
-- `Question` model (text, options, answer)
-- Shuffled questions per selected category
-- Scoring algorithm (10 pts correct)
-- Tracks accuracy and elapsed time
-
-## 7. Password Manager (`PasswordManager`)
-
-Generates strong passwords and stores service credentials.
-
-**Highlights**
-
-- Random password generator with optional special chars
-- Strength calculation & weak-password detection
-- Base64 pseudo-encryption for demo
-- CRUD list of saved passwords
-
-## 8. Inventory Management System (`InventoryManagement`)
-
-Warehouse tracker for product stock, reorder alerts, and value calculation.
-
-**Highlights**
-
-- `Product` model with quantity, price, reorder level
-- Add/remove stock with `InsufficientStockException`
-- Low-stock report & total inventory valuation
-- All monetary calculations in double for simplicity
-
-## 9. Task Management System (`TaskManagement`)
-
-Organize tasks by priority, due date, completion status, and view stats.
-
-**Highlights**
-
-- `Task` model using `LocalDate`
-- Overdue detection and completion rate metric
-- Priority validation (1-5)
-- Custom date & completion exceptions
-
-## 10. ATM Simulator (`ATM`)
-
-Simulates an ATM interface with PIN authentication, transactions, and receipt printing.
-
-**Highlights**
-
-- `ATMAccount` with transaction history list
-- 4-digit PIN auth; demo account pre-seeded (#10001/1234)
-- Deposit, withdraw, balance inquiry, print receipt
-- `InsufficientFundsException` & `InvalidPINException`
-
-## 11. Hangman Game (`Hangman`)
-
-Classic word-guessing game featuring three difficulties, ASCII hangman drawing, scoring, and replay.
-
-**Highlights**
-
-- Word banks for easy/medium/hard
-- ASCII art stages array
-- Set of guessed letters, progress display
-- Score based on word length and attempts remaining
+These projects range from utilities like password managers to interactive games like Hangman, giving you a comprehensive foundation for software development.
 
 ---
 
-## Development Notes
+## 💡 Why build this?
 
-- No third-party libraries—ideal for learn
-ing core Java.
-- Each main class contains a `Scanner`-based input loop; press `Ctrl+C` or follow Exit menu item to quit.
+Java is a powerful, industry-grade language, but learning it through theory alone can be limiting. This repo helps you:
 
-Enjoy exploring and extending these mini-applications!
+- 🚀 Level up by solving real-world problems.
+- 🧠 Internalize OOP concepts, collections, exceptions, and file handling.
+- 💻 Prepare for interviews, college assignments, or freelance projects.
+- 🎯 Focus on logic, design, and clean code—without distractions from GUI or libraries.
+
+Whether you’re a student, hobbyist, or aspiring backend dev, these projects are your playground for practical Java mastery.
+
+---
+
+## 🛠️ How to Get Started
+
+To get started, we will need some software;
+
+- **Java Development Kit (JDK)**: Download the latest version from the official Oracle website. [Download Here](https://www.oracle.com/java/technologies/javase-downloads.html)
+- **Java Integrated Development Environment (IDE)**: Choose your preferred IDE (Eclipse, IntelliJ, or Visual Studio Code with Java plugins).
+    - **Eclipse**: Download from the official Eclipse website. [Download Here](https://www.eclipse.org/downloads/)
+    - **IntelliJ IDEA**: Download from the JetBrains website. [Download Here](https://www.jetbrains.com/idea/download/)
+    - **Visual Studio Code**: Download and install the Java extension. [Download Here](https://code.visualstudio.com)
+
+---
+
+## 🧪 Requirement
+
+- Java 8+ (recommended: Java 17+)
+- Basic understanding of object-oriented programming, variables, data types, and control structures.
+
+---
+
+## 📚 Projects Overview
+
+**Project Description**
+
+1. [**Student Grade Calculator**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/Student_Grade) - Add students, calculate class average, assign grades.
+2. [**Banking Account Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/BankAccount) - Manage bank accounts with deposit, withdrawal, and balance.
+3. [**Library Book Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/LibraryManagement) - Track, borrow, and return books with search.
+4. [**Expense Tracker**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ExpenseTracker) - Monitor daily expenses, categories, and monthly budget.
+5. [**Contact Directory**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ContactDirectory) - Add, update, and search for contacts.
+6. [**Quiz Game Engine**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/QuizGame) - Play timed, scored quizzes with difficulty levels.
+7. [**Password Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/PasswordManager) - Generate, store, and check password strength.
+8. [**Inventory Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/InventoryManagement) - Manage stock levels, restock alerts, and valuation.
+9. [**Task Tracker**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/TaskManagement) - Prioritize and schedule tasks with completion tracking.
+10. [**ATM Simulator**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ATM) - PIN-based ATM simulation with receipt generation.
+11. [**Hangman Game**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/Hangman) - Classic word guessing game with difficulty settings.
+
+---
+
+## 🚀 How to Run Each Project
+
+Each project is contained within its respective folder and comes with a detailed README on how to run and test it.
+
+---
+
+## 📦 Detailed Project Highlights
+
+1. [**Student Grade Calculator**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/Student_Grade)
+
+- Add student name and grade (0-100)
+- Display class average and corresponding grade letter
+- Show top‐scoring student
+- List all students with their scores & grade letters
+- Exit program
+
+---
+
+2. [**Banking Account Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/BankAccount)
+
+- Create, view, update, and delete accounts
+- Deposit, withdraw, and check account balances
+- Custom exception for insufficient funds
+
+---
+
+3. [**Library Management System**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/LibraryManagement)
+
+- Add, remove, and check book availability
+- Search by title, author, or ISBN
+- Display formatted book catalog
+
+---
+
+4. [**Expense Tracker**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ExpenseTracker)
+
+- Add, remove, and view monthly expenses
+- Categorize expenses for detailed tracking
+- Over-budget warnings and monthly views
+- Uses java.time and Streams for totals
+
+---
+
+5. [**Contact Directory**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ContactDirectory)
+
+- Add, update, and search for contacts
+- Regex-based phone/email validation
+- Duplicate prevention and edit functionality
+- Modular CLI with validation exceptions  (Regex, Duplicate, Edit)
+
+---
+6. [**Quiz Game Engine**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/QuizGame) (QuizGame)
+
+- Shuffled questions with scoring system
+- Tracks accuracy and response time
+- Select quiz category and difficulty level
+
+---
+
+7. [**Password Manager**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/PasswordManager)
+
+- Strong password generator with optional symbols
+- Base64 mock encryption (for learning)
+- Password strength feedback and list management
+
+---
+
+8. [**Inventory System**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/InventoryManagement)
+
+- Add/remove stock and auto-alert for reorder level
+- Custom InsufficientStockException
+- Calculates total inventory value
+
+---
+
+9. [**Task Management System**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/TaskManagement)
+
+- Tasks with deadlines, priority, and completion status
+- Completion percentage + overdue detection
+- Uses LocalDate and custom exception handling
+
+10. [**ATM Simulator**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/ATM)
+
+- PIN-authenticated transactions with demo account
+- Record transaction history and print receipts
+- Handles invalid PIN and balance exceptions
+
+---
+
+11. [**Hangman Game**](https://github.com/darshan-regmi/JAVA-_-Exercise/tree/main/Hangman)
+
+- Word guessing with difficulty levels and scoring
+- ASCII drawing for hangman visuals
+- Replay option and score tracking
+
+---
+
+## 🧭 Learning Focus
+
+- ✅ Object-Oriented Programming
+- ✅ Input Handling and Validation
+- ✅ Exception Handling
+- ✅ Collections (Array and ArrayList)
+- ✅ CLI Design and Logic
+
+---
+
+## 📝 Dev Notes
+
+- No external libraries—pure Java.
+- Use Ctrl+C or Exit option in menus to stop apps.
+- Feel free to fork, modify, and share your versions!
+
+---
+
+## 🧠 Final Words
+
+Learning Java doesn’t have to be boring. These projects are designed to be fun, practical, and progressive—so you actually enjoy the learning process while building a portfolio.
+
+> 🎉 Let’s code Java the way it was meant to be—clean, clever, and console-ready.

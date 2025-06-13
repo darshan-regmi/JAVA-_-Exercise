@@ -1,6 +1,5 @@
 package Student_Grade;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +25,12 @@ public class StudentGradeCalculator {
 
         System.out.println("===== Student Grade Calculator =====");
         while (true) {
-            printMenu();
+        System.out.println("\nMenu:");
+        System.out.println("1. Add Student");
+        System.out.println("2. Show Class Average");
+        System.out.println("3. Show Top Student");
+        System.out.println("4. List All Students");
+        System.out.println("5. Exit");
             int choice = readInt("Choose an option: ");
             switch (choice) {
                 case 1 -> addStudent(studentNames, studentGrades);
