@@ -1,256 +1,128 @@
-# Building a ATM Simulator in Java
+# ATM Simulator CLI – Java Practice Project
+
+Welcome, budding Java developer! 👋 In this mini–project you will build a **command-line ATM simulator** consisting of two files: `ATMAccount.java` and `ATMSimulatorCLI.java`. By the end, you will have a tiny banking app you can run from any terminal – just like the software that powers real ATM machines (minus the money-spitting hardware).
 
 ---
 
-## 🛠 What You Need
+## Why Build This?
 
-1. **Java 17+** (or any recent version). Install from Oracle or OpenJDK.
-2. A text editor (VS Code, IntelliJ, or even Notepad).
-3. A terminal / command prompt to run `javac` and `java`.
+* **Real-world relevance** – Every time you use an ATM, software very similar to this project is performing deposits, withdrawals, and balance checks.
+* **OOP fundamentals** – Sharpen your skills with classes, objects, encapsulation, and simple error handling.
+* **Instant feedback** – A CLI gives immediate input/output, so you can iteratively test each feature.
 
 ---
 
-## 1. Create the Project Folder
+## Quick Demo
 
 ```bash
-mkdir ATM
-cd ATM
+❯ javac ATMSimulatorCLI.java ATMAccount.java # compile the files
+❯ java ATMSimulatorCLI # run the CLI
+===== ATM Simulator =====
+Enter account number (0 to exit): 
+>>
 ```
-
-You will keep every `.java` file in this `ATM` folder. In Java a folder is called a **package**; here the package name will be `ATM`.
 
 ---
 
-## 2. Writing the `ATMAccount` Class
+## Prerequisites
 
-`ATMAccount.java` describes **one bank account**. Create the file and paste the code pieces as we go.
-
-### 2.1 Boilerplate: package & imports
-
-```java
-package ATM;              // tells Java the file lives in the ATM folder
-import java.util.*;       // List & ArrayList live here
-```
-
-### 2.2 Fields (Variables that belong to every account)
-
-```java
-public class ATMAccount {
-    private static int NEXT_ACC_NUMBER = 10001;  // shared counter for new IDs
-
-    private final int accountNumber;  // unique id -> never changes (final)
-    private final int pin;            // 4-digit secret number
-    private double balance;           // money we keep, can change, so NOT final
-    private final List<String> history = new ArrayList<>(); // list of actions
-```
-
-**Why these data-types?**
-
-* `int`  → whole numbers (no decimals). Perfect for IDs & PINs.
-* `double` → decimal numbers. Quick & easy for money in tiny demos. (Banks use `BigDecimal`, but that is advanced.)
-* `List<String>` → an ordered collection; lets us push messages like *"Deposit 100"*.
-* `final`  → means the variable can be set **once**. Protects us from accidental changes.
-
-### 2.3 Constructor – code that runs when we `new ATMAccount(...)`
-
-```java
-    public ATMAccount(int pin, double initialBalance) {
-        if (pin < 1000 || pin > 9999)               // condition check
-            throw new IllegalArgumentException("PIN must be 4 digits");
-        if (initialBalance < 0)
-            throw new IllegalArgumentException("Initial balance cannot be negative");
-
-        this.accountNumber = NEXT_ACC_NUMBER++;     // auto-assign & increment
-        this.pin = pin;
-        this.balance = initialBalance;
-        history.add(String.format("Account created with %.2f", initialBalance));
-    }
-```
-
-Why **conditions** (`if`) & exceptions? They *guard* against bad data. Instead of letting the program continue in a broken state, we immediately stop and show a helpful message.
-
-### 2.4 Public Methods – the account’s actions
-
-```java
-    public int getAccountNumber() { return accountNumber; }
-
-    public boolean authenticate(int pin) {              // returns true/false
-        return this.pin == pin;                         // simple equality check
-    }
-
-    public double getBalance() { return balance; }
-
-    public void deposit(double amt) {
-        if (amt <= 0) throw new IllegalArgumentException("Deposit must be positive");
-        balance += amt;
-        history.add(String.format("Deposit %.2f | New balance %.2f", amt, balance));
-    }
-
-    public void withdraw(double amt) throws InsufficientFundsException {
-        if (amt <= 0) throw new IllegalArgumentException("Withdrawal must be positive");
-        if (amt > balance) throw new InsufficientFundsException("Not enough money");
-        balance -= amt;
-        history.add(String.format("Withdraw %.2f | New balance %.2f", amt, balance));
-    }
-
-    public List<String> getHistory() { return history; }
-
-    @Override                   // lets System.out.println(account) show nice info
-    public String toString() {
-        return String.format("#%d | Balance: %.2f", accountNumber, balance);
-    }
-}
-```
-
-**Return types explained**
-
-* `boolean` – only `true` or `false`, great for questions like *“Is the PIN correct?”*
-* `void` – means the method just **does something**; no answer is returned.
-
-### 2.5 Custom Exceptions
-
-Add **tiny** classes at the bottom of the same file:
-
-```java
-class InsufficientFundsException extends Exception {
-    public InsufficientFundsException(String msg) { super(msg); }
-}
-```
-
-Exceptions are just Java classes that signal *something went wrong*.
+* JDK **8+** installed (`java -version` to confirm).
+* A terminal / command prompt.
+* A text editor or IDE (VS Code, IntelliJ, or even Notepad++ – your choice!).
 
 ---
 
-## 3. Building the Command-Line Interface (`ATMSimulatorCLI.java`)
+## Setup
 
-This class owns `main()` – the starting point when you type `java ...`.
-
-### 3.1 Skeleton
-
-```java
-package ATM;
-import java.util.*;
-
-public class ATMSimulatorCLI {
-    private static final Scanner SCANNER = new Scanner(System.in);  // reads user input
-    private static final List<ATMAccount> ACCOUNTS = new ArrayList<>();
-
-    public static void main(String[] args) {
-        ACCOUNTS.add(new ATMAccount(1234, 500)); // demo account so users can play
-```
-
-*`Scanner`* reads what you type. It’s like a keyboard listener.
-
-### 3.2 Login Loop
-
-```java
-        System.out.println("=== ATM ===");
-        while (true) {
-            System.out.print("Account number (0 to exit): ");
-            int accNum = Integer.parseInt(SCANNER.nextLine().trim());
-            if (accNum == 0) return;              // 0 quits program
-            ATMAccount acc = findAccount(accNum);
-            if (acc == null) { System.out.println("Not found\n"); continue; }
-            System.out.print("PIN: ");
-            int pin = Integer.parseInt(SCANNER.nextLine().trim());
-            try {
-                if (!acc.authenticate(pin)) throw new InvalidPINException("Wrong PIN");
-                session(acc);
-            } catch (InvalidPINException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-```
-
-*Notes:* `Integer.parseInt` turns text → number.
-
-### 3.3 Helper Methods
-
-```java
-    private static ATMAccount findAccount(int num) {
-        return ACCOUNTS.stream()
-                       .filter(a -> a.getAccountNumber() == num)
-                       .findFirst()
-                       .orElse(null);
-    }
-```
-
-`stream()` is library magic that scans the list. Don’t worry if it looks alien – it’s just shorter than a loop.
-
-#### session()
-
-```java
-    private static void session(ATMAccount acc) {
-        while (true) {
-            printMenu();
-            int choice = readInt("Choose: ");
-            try {
-                switch (choice) {
-                    case 1 -> System.out.printf("Balance: %.2f%n", acc.getBalance());
-                    case 2 -> {
-                        double amt = readDouble("Deposit: ");
-                        acc.deposit(amt);
-                    }
-                    case 3 -> {
-                        double amt = readDouble("Withdraw: ");
-                        acc.withdraw(amt);
-                    }
-                    case 4 -> acc.getHistory().forEach(System.out::println);
-                    case 5 -> { System.out.println("Bye!\n"); return; }
-                    default -> System.out.println("Invalid choice");
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-    }
-```
-
-`case 1 ->` is a **switch expression** (Java 17). Cleaner than classic `break` syntax.
-
-Input helpers:
-
-```java
-    private static int readInt(String prompt) { /* loop until user types a whole number */ }
-    private static double readDouble(String prompt) { /* similar for decimals */ }
-}
-```
-
-These loops show how to **validate** input: keep asking until the user gives a number.
+1. **Clone or download** this repository.
+2. Open a terminal *inside the `ATM` folder*.
+3. Compile:
+   ```bash
+   javac ATMAccount.java ATMSimulatorCLI.java
+   ```
+4. Run:
+   ```bash
+   java ATMSimulatorCLI
+   ```
+   That’s it! You’re talking to your ATM.
 
 ---
 
-## 4. Compile & Run
+## Step-by-Step Walkthrough
 
-```bash
-javac ATM/*.java          # compiles all files
-java ATM.ATMSimulatorCLI  # run the program
-```
+Below is a mentor-style roadmap. Treat each step like a checkpoint – compile and run after every change so bugs stay small and friendly.
 
-Login with **10001 / 1234** and test deposit, withdraw, history.
+1. **Create the `ATMAccount` class**  
+   - *What you do:* Declare a new class with private fields `accountNumber` and `balance`.  
+   - *Real-world analogy:* Think of a bank folder that stores a unique customer number and their current money tally.  
+   - *Tips:* Mark fields `private` and add descriptive comments.  
+   - *Watch-outs:* Forgetting `private` means anyone can modify balance directly – not good for security.
+
+2. **Add a constructor & getters**  
+   - *What you do:* Write a constructor accepting an `accountNumber` and an initial `balance`. Provide `getBalance()` and `getAccountNumber()`.  
+   - *Analogy:* Opening a fresh bank account with a starting deposit.  
+   - *Tips:* Use `this.` to disambiguate field names.  
+   - *Common mistake:* Accidentally shadowing fields (`balance = balance;`). Always reference `this.balance`.
+
+3. **Implement `deposit(double amount)`**  
+   - *What you do:* Increase `balance` by `amount` **only if** `amount > 0`.  
+   - *Analogy:* Sliding bills into the ATM slot; the machine rejects Monopoly money (negative or zero).  
+   - *Tips:* Return a boolean to signal success/failure – the CLI can then print a friendly message.  
+   - *Watch-outs:* Using `==` for floating-point comparisons; prefer `amount <= 0`.
+
+4. **Implement `withdraw(double amount)` with validation**  
+   - *What you do:* Decrease `balance` when there is enough money *and* `amount > 0`.  
+   - *Analogy:* The ATM checks if your wallet actually contains those bills before handing them over.  
+   - *Tips:* Return `false` for insufficient funds and print a concise error message.  
+   - *Common mistake:* Updating balance *before* checking funds – always validate first!
+
+5. **Add `displayBalance()`**  
+   - *What you do:* Simple `System.out.printf` showing the current balance to two decimal places.  
+   - *Analogy:* The ATM screen flashing your remaining balance.  
+   - *Tip:* Centralising display logic means consistent formatting everywhere.
+
+6. **Design the `ATMSimulatorCLI` main loop**  
+   - *What you do:* In `main()`, instantiate an `ATMAccount`, display a numbered menu, and read user input in a `while` loop.  
+   - *Analogy:* The never-ending ATM service cycle waiting for the next customer.  
+   - *Tips:* Use `Scanner` for input and a `switch` to route actions.  
+   - *Common mistake:* Forgetting to close `Scanner` on exit; it’s polite to release resources.
+
+7. **Wire menu options to account methods**  
+   - *What you do:* For each menu number call `deposit`, `withdraw`, or `displayBalance`. Exit gracefully on `4`.  
+   - *Analogy:* Pressing physical buttons on an ATM to trigger internal banking operations.  
+   - *Tip:* Confirm every action back to the user – people like receipts.  
+   - *Watch-outs:* Input mismatch exceptions (e.g., user types letters). Wrap `nextDouble()` calls in `try/catch` or use `hasNextDouble()`.
+
+8. **Polish & test edge cases**  
+   - *What you do:* Try zero, negative, and overflow amounts. Handle invalid menu numbers.  
+   - *Analogy:* Quality-assurance engineers attacking an ATM prototype to break it *before* customers do.  
+   - *Tip:* Add log messages for rejected operations.  
+   - *Common mistake:* Not resetting the scanner buffer – call `nextLine()` after numeric reads.
 
 ---
 
-## 5. Recap – Why Each Piece Matters
+## Common Errors & Fixes
 
-| Concept | Example | Why it’s useful |
-|---------|---------|-----------------|
-| `int` | `pin`, `accountNumber` | small whole numbers, fast |
-| `double` | `balance` | supports decimals for money |
-| `List<String>` | `history` | growable log, keeps order |
-| `final` | `accountNumber` | stops accidental re-assignment |
-| `if` + `throw` | check negative deposit | blocks invalid states early |
-| `Exception` subclass | `InsufficientFundsException` | specific error → specific message |
-| `static` field | `NEXT_ACC_NUMBER` | shared counter across all objects |
+| Error message | Likely cause | Quick fix |
+|---------------|-------------|-----------|
+| `java.util.InputMismatchException` | User typed letters where `double` expected | Use `scanner.hasNextDouble()` before reading or catch the exception and prompt again. |
+| `Cannot access private field balance` | Trying to use `account.balance` directly | Call `getBalance()` or create a public method inside `ATMAccount`. |
+| `symbol not found: Scanner` | Forgot import | Add `import java.util.Scanner;` at the top of `ATMSimulatorCLI.java`. |
+| `Exception in thread "main" java.lang.NumberFormatException` | Parsing string to number without validation | Wrap `Double.parseDouble()` in a `try/catch`. |
+| Balance becomes negative after withdrawal | Validation logic missing | Before subtracting, check `amount <= balance`. |
 
 ---
 
-## 6. Next Steps (When You’re Ready)
+## Bonus Extension Ideas
 
-* Replace `double` with `BigDecimal` for exact cents.
-* Save accounts to a file so they persist after closing.
-* Build a graphical interface with JavaFX or Swing.
-* Write **unit tests** to automate checks (JUnit).
+- **Multiple accounts** – Store a `Map<Integer, ATMAccount>` and let users “insert” different cards.
+- **PIN authentication** – Add security before transactions.
+- **Persistence** – Save balances to a file or small database so money survives program restarts.
+- **Unit tests** – Use JUnit to ensure deposits and withdrawals never misbehave.
+- **GUI upgrade** – Swing or JavaFX for a windowed ATM.
 
-Happy coding! 🎉
+---
+
+## You Got This! 🚀
+
+Every successful software engineer started with tiny projects just like this one. Celebrate each bug you squash – it means you learned something new today. Keep iterating, keep experimenting, and most importantly **have fun**. The ATM world (and the real one) awaits your next creation!

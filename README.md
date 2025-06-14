@@ -15,8 +15,7 @@ We struggled with Java basics in college, and we wanted to create a practical le
 Java is a powerful, industry-grade language, but learning it through theory alone can be limiting. This repo helps you:
 
 - 🚀 Level up by solving real-world problems.
-- 🧠 Internalize OOP concepts, collections, exceptions, and file handling.
-- 💻 College assignments.
+- 🧠 Understand OOP concepts, collections, exceptions, and file handling.
 
 ---
 
