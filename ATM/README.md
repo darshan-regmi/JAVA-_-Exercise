@@ -24,30 +24,6 @@ Enter account number (0 to exit):
 
 ---
 
-## Prerequisites
-
-* JDK **8+** installed (`java -version` to confirm).
-* A terminal / command prompt.
-* A text editor or IDE (VS Code, IntelliJ, or even Notepad++ – your choice!).
-
----
-
-## Setup
-
-1. **Clone or download** this repository.
-2. Open a terminal *inside the `ATM` folder*.
-3. Compile:
-   ```bash
-   javac ATMAccount.java ATMSimulatorCLI.java
-   ```
-4. Run:
-   ```bash
-   java ATMSimulatorCLI
-   ```
-   That’s it! You’re talking to your ATM.
-
----
-
 ## Step-by-Step Walkthrough
 
 Below is a mentor-style roadmap. Treat each step like a checkpoint – compile and run after every change so bugs stay small and friendly.
