@@ -214,7 +214,7 @@ Learning Java doesn’t have to be boring. These projects are designed to be fun
 
 > 🎉 Let’s code Java the way it was meant to be—clean, clever, and console-ready.
 
-> If you wish to request any project or have any feedback, please don’t hesitate to reach out. [mailto:dev@icp.edu.np]
+> If you wish to request any project or have any feedback, please don’t hesitate to reach out. [Mail us Here](mailto:dev@icp.edu.np)
 
 ---
 
