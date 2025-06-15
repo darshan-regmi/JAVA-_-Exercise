@@ -8,7 +8,7 @@ public class ATMAccount{
 }
 ```
 
-And after we have made the class we can add private varibales to it.
+And after we have made the class we can add private attributes to it.
 
 ```java
 public class ATMAccount{

@@ -38,6 +38,30 @@ To get started, we will need some software;
 
 ---
 
+## Getting Started
+
+### Step 1: Create a folder name Java_Exercise in your desired location
+
+```bash
+mkdir Java_Exercise
+```
+
+### Step 2: Navigate to the folder
+
+```bash
+cd Java_Exercise
+```
+
+### Step 3: Make the folder for the project you want to build
+
+```bash
+mkdir <Project_name>
+```
+
+Replace `<Project_name>` with the name of the project you want to build. For example, if you want to build the Student Grade Calculator, you would replace `<Project_name>` with `Student_Grade`.
+
+---
+
 ## 📚 Projects Overview
 
 **Project Description**
